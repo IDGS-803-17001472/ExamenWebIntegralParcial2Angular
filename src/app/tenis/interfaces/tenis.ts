@@ -4,4 +4,5 @@ export interface ITenis {
   precio: number;
   categoria: string;
   imagen: string;
+  descripcion: string;
 }

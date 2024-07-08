@@ -1,23 +1,36 @@
-<div class="container">
-  <!-- Search and Categories -->
-  <div class="d-flex justify-content-center mb-3">
-    <input type="text" class="form-control w-25 me-2" placeholder="Buscar">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-outline-secondary">Categoría 1</button>
-      <button type="button" class="btn btn-outline-secondary">Categoría 2</button>
-      <button type="button" class="btn btn-outline-secondary">Categoría 3</button>
-    </div>
+<div>
+  <label for="search">Buscar:</label>
+  <input
+    type="text"
+    id="search"
+    class="form-control"
+    placeholder="Escribe para buscar"
+    (input)="onSearchChange($event)"
+  />
+</div>
+<div>
+  <label>Filtrar por categoría:</label>
+  <div>
+    <button
+      *ngFor="let category of categorias"
+      (click)="cambiarCategoria(category)"
+      [disabled]="categoria === category"
+      class="btn btn-primary m-1"
+    >
+      {{ category }}
+    </button>
   </div>
+</div>
 
-  <!-- Productos -->
-  <div class="row mb-3">
-    <div class="col-md-4 mb-3" *ngFor="let producto of productos">
-      <div class="card">
-        <img [src]="producto.imagen" class="card-img-top" alt="{{producto.nombre}}">
-        <div class="card-body">
-          <h5 class="card-title">{{producto.nombre}}</h5>
-          <p class="card-text">{{producto.descripcion}}</p>
-        </div>
+<div class="row">
+  <div class="col-md-4" *ngFor="let tenis of listaFiltrada">
+    <div class="card mb-4 shadow-sm">
+      <img [src]="tenis?.imagen" class="card-img-top img-fluid  "  height="100%" [alt]="tenis?.nombre">
+      <div class="card-body">
+        <h5 class="card-title">{{ tenis?.nombre }}</h5>
+        <p class="card-text">{{ tenis?.descripcion }}</p>
+        <p class="card-text"><strong>Precio:</strong> {{ tenis?.precio | currency }}</p>
+        <p class="card-text"><strong>Categoría:</strong> {{ tenis?.categoria }}</p>
       </div>
     </div>
   </div>

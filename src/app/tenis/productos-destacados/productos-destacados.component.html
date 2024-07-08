@@ -1,10 +1,12 @@
 <div class="row mb-3">
   <div class="col-md-4 mb-3" *ngFor="let producto of productos">
     <div class="card">
-      <img [src]="producto.imagen" class="card-img-top" alt="{{producto.nombre}}">
+      <img [src]="producto.imagen" class="card-img-top img-fluid" alt="{{producto.nombre}}">
       <div class="card-body">
         <h5 class="card-title">{{producto.nombre}}</h5>
-        <p class="card-text">{{producto.descripcion}}</p>
+        <p class="card-text">{{ producto?.descripcion }}</p>
+        <p class="card-text"><strong>Precio:</strong> {{ producto?.precio | currency }}</p>
+        <p class="card-text"><strong>Categoría:</strong> {{ producto?.categoria }}</p>
       </div>
     </div>
   </div>

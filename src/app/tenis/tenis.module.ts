@@ -10,7 +10,8 @@ import { ProductosDestacadosComponent } from './productos-destacados/productos-d
 import { RouterLink } from '@angular/router';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { InfoComponent } from './info/info.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { InfoComponent } from './info/info.component';
     InfoComponent
   ],
   imports: [
-    CommonModule, RouterLink
+    CommonModule, RouterLink, HttpClientModule, FormsModule
   ],
   exports:[
      BannerComponent, PiePaginaComponent, FormularioContactoComponent,EncabezadoComponent, HomepageComponent, InfoEmpresaComponent, ProductosDestacadosComponent

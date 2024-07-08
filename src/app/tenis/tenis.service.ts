@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class TenisService {
 
   private _endpoint: string = environment.endPoint;
-  private _apiUrl: string = `${this._endpoint}tenis/`;
+  private _apiUrl: string = `${this._endpoint}Tenis/`;
 
   constructor(private http: HttpClient) { }
 

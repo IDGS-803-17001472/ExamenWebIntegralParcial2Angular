@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TenisService } from '../tenis.service';
+import { ITenis } from '../interfaces/tenis';
 
 @Component({
   selector: 'app-productos-destacados',
@@ -7,40 +9,40 @@ import { Component } from '@angular/core';
 })
 export class ProductosDestacadosComponent {
 
-  productos = [
-    {
-      nombre: 'Producto 1',
-      descripcion: 'Descripción breve del producto 1.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      nombre: 'Producto 2',
-      descripcion: 'Descripción breve del producto 2.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      nombre: 'Producto 3',
-      descripcion: 'Descripción breve del producto 3.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      nombre: 'Producto 4',
-      descripcion: 'Descripción breve del producto 4.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      nombre: 'Producto 5',
-      descripcion: 'Descripción breve del producto 5.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      nombre: 'Producto 6',
-      descripcion: 'Descripción breve del producto 6.',
-      imagen: 'https://via.placeholder.com/150'
-    }
-  ];
 
-  constructor() { }
+
+  productos: ITenis[] = [];
+  listaFiltrada: ITenis[] = [];
+  textoBusqueda: string = '';
+
+  constructor(private _tenisService: TenisService) {
+    this.obtenerTenis();
+    this.productos = this.productos.slice(0, 3);
+  }
+
+  obtenerTenis() {
+    this._tenisService.getTenis().subscribe({
+      next: (data) => {
+        this.productos = data.slice(0, 3);
+        this.listaFiltrada = data;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+  filtrarPorCategoria(categoria: string) {
+    this.textoBusqueda = '';
+    this.listaFiltrada = this.productos.filter(v => v.categoria === categoria);
+  }
+
+  obtenerTodos() {
+    this.textoBusqueda = '';
+    this.listaFiltrada = this.productos;
+  }
+
+
 
   ngOnInit(): void {
     this.productos = this.productos.slice(0, 3);
